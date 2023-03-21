@@ -31,13 +31,6 @@ Run the following commands:
    git config --global user.name="Robin ALEXANDER"
    git config --global user.email="robin.alexander@netplus.ch"
    ```
-1. devscripts
-   ```
-   cat << 'EOF' > $HOME/.devscripts
-   DEBUILD_DPKG_BUILDPACKAGE_OPTS="-i -I -us -uc"
-   DEBUILD_LINTIAN_OPTS="-i -I --show-overrides"
-   EOF
-   ```
 1. git-buildpackage
    ```
    cat << 'EOF' > $HOME/.gbp.conf
@@ -46,13 +39,25 @@ Run the following commands:
    upstream-branch = upstream/latest
    EOF
    ```
+1. dput
+   ```
+   cat << 'EOF' > $HOME/.dput.cf
+   [mentors]
+   fqdn = mentors.debian.net
+   incoming = /upload
+   method = https
+   allow_unsigned_uploads = 0
+   progress_indicator = 2
+   allowed_distributions = .*
+   EOF
+   ```
 1. Sign-off and sign-on again
 
 ## Create the debian build environments
 
 1. Create a dedicated tree structure:
    ```
-   mkdir -p $HOME/odr-mmbtools/build-area
+   mkdir -p $HOME/odr-mmbtools/build-area/{unstable,bullseye}
    ```
 1. Create the debian build environments for all the distributions and architectures tracked by the Opendigitalradio debian repository:
    ```
