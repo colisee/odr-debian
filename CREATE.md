@@ -1,39 +1,61 @@
 This document describes the steps required to create the
-initial debian package.
+initial debian package from scratch.
 
 ## Create the initial debian package for unstable
 
 1. Create the initial debianized git environment:
    ```
-   mmbtool_name=odr-dabmod
-   mmbtool_version=2.6.0
+   mmbtool_name=odr-audioenc
+   mmbtool_version=3.3.1
+   mmbtool_dir="${HOME}/odr-mmbtools/${mmbtool_name}-${mmbtool_version}"
    upstream="https://github.com/Opendigitalradio/${mmbtool_name}/archive/refs/tags/v${mmbtool_version}.tar.gz"
 
-   mkdir -p ${HOME}/odr-mmbtool_names/${mmbtool_name}
-   cd ${HOME}/odr-mmbtool_names/${mmbtool_name}
+   mkdir -p "${mmbtool_dir}"
+   cd "${mmbtool_dir}"
+   wget \
+     --output-document="../${mmbtool_name}-${mmbtool_version}.tar.gz" \
+     ${upstream}
    git init
    gbp import-orig \
+     --no-interactive \
+     --upstream-version="${mmbtool_version}" \
      --upstream-branch=upstream/latest \
      --debian-branch=debian/latest \
-     ${upstream}
+     "../${mmbtool_name}-${mmbtool_version}.tar.gz"
    ```
 1. Add the debian template files:
    ```
    debmake \
-     --package ${mmbtool_name}
+     --package ${mmbtool_name} \
      --upstreamversion ${mmbtool_version}
    ```
 1. Review and complete the content of the debian directory. Check the [Guide for Debian Maintainer](https://www.debian.org/doc/manuals/debmake-doc/index.en.html)
 1. Build the debian package:
    ```
-   build=$(pwd)/../build-area;
-   dist=unstable;
-   branch=debian/latest;
-   git checkout ${branch};
    gbp buildpackage \
-     --git-ignore-new \
-     --git-debian-branch=${branch} \
-     --git-export-dir=${build} \
-     --git-builder=debspawn build --lintian --results-dir=${build}/${dist} ${dist}
+     --git-builder="debspawn build --results-dir=$HOME/odr-mmbtools/build-area/unstable --lintian unstable" \
+     --git-export=WC \
+     --git-export-dir="$HOME/odr-mmbtools/build-area"
    ```
-1. Verify the results from lintian, fix the problems and repeat the previous build
+1. Verify the results from lintian, fix the problems if any and repeat the 
+previous build until you are satisfied
+1. Commit and tag the changes
+   ```
+   git add debian/
+   git commit -m "Initial release"
+   gbp buildpackage \
+     --git-tag-only \
+     --git-debian-branch=debian/latest
+   ```
+1. Sign the package
+   ```
+   debsign --debs-dir $HOME/odr-mmbtools/build-area/unstable
+   ```
+1. Send the package to debian
+   ```
+   dput \
+     mentors \
+     $HOME/odr-mmbtools/build-area/unstable/${mmbtool_name}*.changes
+   ```
+
+## Create the initial package for bullseye
