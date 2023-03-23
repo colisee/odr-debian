@@ -13,15 +13,14 @@ initial debian package from scratch.
    mkdir -p "${mmbtool_dir}"
    cd "${mmbtool_dir}"
    wget \
-     --output-document="../${mmbtool_name}-${mmbtool_version}.tar.gz" \
+     --output-document="../${mmbtool_name}_${mmbtool_version}.tar.gz" \
      ${upstream}
    git init
    gbp import-orig \
      --no-interactive \
-     --upstream-version="${mmbtool_version}" \
      --upstream-branch=upstream/latest \
      --debian-branch=debian/latest \
-     "../${mmbtool_name}-${mmbtool_version}.tar.gz"
+     "../${mmbtool_name}_${mmbtool_version}.tar.gz"
    ```
 1. Add the debian template files:
    ```
