@@ -7,7 +7,7 @@ initial debian package from scratch.
    ```
    mmbtool_name=odr-audioenc
    mmbtool_version=3.3.1
-   mmbtool_dir="${HOME}/odr-mmbtools/${mmbtool_name}-${mmbtool_version}"
+   mmbtool_dir="${HOME}/odr-mmbtools/${mmbtool_name}"
    upstream="https://github.com/Opendigitalradio/${mmbtool_name}/archive/refs/tags/v${mmbtool_version}.tar.gz"
 
    mkdir -p "${mmbtool_dir}"
@@ -41,14 +41,15 @@ previous build until you are satisfied
 1. Commit and tag the changes
    ```
    git add debian/
-   git commit -m "Initial release"
+   git commit -m "Initial debian package for unstable"
+   ```
+1. Build and sign the package
+   ```
    gbp buildpackage \
-     --git-tag-only \
-     --git-debian-branch=debian/latest
-   ```
-1. Sign the package
-   ```
-   debsign --debs-dir $HOME/odr-mmbtools/build-area/unstable
+     --git-builder="debspawn build --results-dir=$HOME/odr-mmbtools/build-area/unstable --sign unstable" \
+     --git-tag \
+     --git-debian-branch=debian/latest \
+     --git-export-dir="$HOME/odr-mmbtools/build-area"
    ```
 1. Send the package to debian
    ```
@@ -57,4 +58,40 @@ previous build until you are satisfied
      $HOME/odr-mmbtools/build-area/unstable/${mmbtool_name}*.changes
    ```
 
-## Create the initial package for bullseye
+## Create the initial package for a stable release
+
+1. Create a new branch
+   ```
+   distribution=bullseye
+   git checkout debian/latest
+   git checkout -b odr/${distribution}
+   ```
+1. Change the debian/changelog file
+   ```
+   sed -e "s/unstable/${distribution}/g" -i "debian/changelog"
+   ```
+1. Build the debian package:
+   ```
+   gbp buildpackage \
+     --git-builder="debspawn build --results-dir=$HOME/odr-mmbtools/build-area/${distribution} --lintian ${distribution}" \
+     --git-export=WC \
+     --git-export-dir="$HOME/odr-mmbtools/build-area"
+   ```
+1. Verify the results from lintian, fix the problems if any and repeat the 
+previous build until you are satisfied
+1. Commit and tag the changes
+   ```
+   git commit -a -m "Initial debian package for ${distribution}"
+   ```
+1. Build and sign the package
+   ```
+   gbp buildpackage \
+     --git-builder="debspawn build --results-dir=$HOME/odr-mmbtools/build-area/${distribution} --sign ${distribution}" \
+     --git-debian-tag='odr/%(version)s' \
+     --git-tag \
+     --git-debian-branch=odr/${distribution} \
+     --git-export-dir="$HOME/odr-mmbtools/build-area"
+   ```
+
+## Push the repository to salsa.debian.org
+
