@@ -16,10 +16,11 @@ initial debian package from scratch.
      --output-document="../${mmbtool_name}_${mmbtool_version}.tar.gz" \
      ${upstream}
    git init
+   distrib=unstable
    gbp import-orig \
      --no-interactive \
      --upstream-branch=upstream/latest \
-     --debian-branch=debian/latest \
+     --debian-branch=${distrib}/latest \
      "../${mmbtool_name}_${mmbtool_version}.tar.gz"
    ```
 1. Add the debian template files:
@@ -32,7 +33,7 @@ initial debian package from scratch.
 1. Build the debian package:
    ```
    gbp buildpackage \
-     --git-builder="debspawn build --results-dir=$HOME/odr-mmbtools/build-area/unstable --lintian unstable" \
+     --git-builder="debspawn build --results-dir=$HOME/odr-mmbtools/build-area/${distrib} --lintian ${distrib}" \
      --git-export=WC \
      --git-export-dir="$HOME/odr-mmbtools/build-area"
    ```
@@ -41,39 +42,40 @@ previous build until you are satisfied
 1. Commit and tag the changes
    ```
    git add debian/
-   git commit -m "Initial debian package for unstable"
+   git commit -m "Initial debian package for ${distrib}"
    ```
 1. Build and sign the package
    ```
    gbp buildpackage \
-     --git-builder="debspawn build --results-dir=$HOME/odr-mmbtools/build-area/unstable --sign unstable" \
+     --git-builder="debspawn build --results-dir=$HOME/odr-mmbtools/build-area/${distrib} --sign ${distrib}" \
+     --git-debian-tag="${distrib}/%(version)s" \
      --git-tag \
-     --git-debian-branch=debian/latest \
+     --git-debian-branch=${distrib}/latest \
      --git-export-dir="$HOME/odr-mmbtools/build-area"
    ```
-1. Send the package to debian
+1. Send the package to the debian repository
    ```
    dput \
      mentors \
-     $HOME/odr-mmbtools/build-area/unstable/${mmbtool_name}*.changes
+     $HOME/odr-mmbtools/build-area/${distrib}/${mmbtool_name}*.changes
    ```
 
-## Create the initial package for a stable release
+## Create the initial debian package for stable (ex: bullseye)
 
 1. Create a new branch
    ```
-   distribution=bullseye
+   distrib=bullseye
    git checkout debian/latest
-   git checkout -b odr/${distribution}
+   git checkout -b ${distrib}/latest
    ```
 1. Change the debian/changelog file
    ```
-   sed -e "s/unstable/${distribution}/g" -i "debian/changelog"
+   sed -e "s/unstable/${distrib}/g" -i "debian/changelog"
    ```
 1. Build the debian package:
    ```
    gbp buildpackage \
-     --git-builder="debspawn build --results-dir=$HOME/odr-mmbtools/build-area/${distribution} --lintian ${distribution}" \
+     --git-builder="debspawn build --results-dir=$HOME/odr-mmbtools/build-area/${distrib} --lintian ${distrib}" \
      --git-export=WC \
      --git-export-dir="$HOME/odr-mmbtools/build-area"
    ```
@@ -81,15 +83,15 @@ previous build until you are satisfied
 previous build until you are satisfied
 1. Commit and tag the changes
    ```
-   git commit -a -m "Initial debian package for ${distribution}"
+   git commit -a -m "Initial debian package for ${distrib}"
    ```
 1. Build and sign the package
    ```
    gbp buildpackage \
-     --git-builder="debspawn build --results-dir=$HOME/odr-mmbtools/build-area/${distribution} --sign ${distribution}" \
-     --git-debian-tag='odr/%(version)s' \
+     --git-builder="debspawn build --results-dir=$HOME/odr-mmbtools/build-area/${distrib} --sign ${distrib}" \
+     --git-debian-tag="${distrib}/%(version)s" \
      --git-tag \
-     --git-debian-branch=odr/${distribution} \
+     --git-debian-branch=${distrib}/latest \
      --git-export-dir="$HOME/odr-mmbtools/build-area"
    ```
 
