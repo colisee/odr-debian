@@ -10,4 +10,4 @@ who maintains the private debian package repository.
 
 - [Setup your development environment](SETUP.md)
 - [Create the debian package definition](CREATE.md)
-- [Build the debian package](BUILD.md)
+- [Update the debian package](UPDATE.md)
