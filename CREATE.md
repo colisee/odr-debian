@@ -97,3 +97,21 @@ previous build until you are satisfied
 
 ## Push the repository to salsa.debian.org
 
+1. Get back to the branch unstable/latest
+   ```
+   git checkout unstable/latest
+   ```
+1. Create the remote repository with all branches
+   ```
+   git push \
+     --all \
+     --set-upstream \
+     git@salsa.debian.org:ralex/${mmbtool_name}.git
+   ```
+1. Push all the tags to the remore repository
+   ```
+   git push \
+     --tags \
+     git@salsa.debian.org:ralex/${mmbtool_name}.git
+   ```
+
