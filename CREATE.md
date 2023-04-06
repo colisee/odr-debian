@@ -3,20 +3,25 @@ initial debian package from scratch.
 
 ## Create the initial debian package for unstable
 
-1. Create the initial debianized git environment:
+1. Set working variables
    ```
    mmbtool_name=odr-audioenc
    mmbtool_version=3.3.1
    mmbtool_dir="${HOME}/odr-mmbtools/${mmbtool_name}"
    upstream="https://github.com/Opendigitalradio/${mmbtool_name}/archive/refs/tags/v${mmbtool_version}.tar.gz"
-
+   ```
+1. Set distribution name
+   ```
+   distrib=unstable
+   ```
+1. Create the initial debianized git environment:
+   ```
    mkdir -p "${mmbtool_dir}"
    cd "${mmbtool_dir}"
    wget \
      --output-document="../${mmbtool_name}_${mmbtool_version}.tar.gz" \
      ${upstream}
    git init
-   distrib=unstable
    gbp import-orig \
      --no-interactive \
      --upstream-branch=upstream/latest \
@@ -62,9 +67,12 @@ previous build until you are satisfied
 
 ## Create the initial debian package for stable (ex: bullseye)
 
-1. Create a new branch
+1. Set distribution name
    ```
    distrib=bullseye
+   ```
+1. Create a new branch
+   ```
    git checkout unstable/latest
    git checkout -b ${distrib}/latest
    ```
