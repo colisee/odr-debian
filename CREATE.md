@@ -44,23 +44,27 @@ initial debian package from scratch.
    ```
 1. Verify the results from lintian, fix the problems if any and repeat the 
 previous build until you are satisfied
-1. Commit and tag the changes
+1. Commit the changes:
    ```
-   git add debian/
-   git commit -m "Initial debian package for ${distrib}"
+   git commit -a -m "Initial debian package for ${distrib}"
    ```
-1. Build and sign the package
+1. Build the debian package and add a tag:
    ```
    gbp buildpackage \
-     --git-builder="debspawn build --results-dir=$HOME/odr-mmbtools/build-area/${distrib} --sign ${distrib}" \
+     --git-builder="debspawn build --results-dir=$HOME/odr-mmbtools/build-area/${distrib} ${distrib}" \
      --git-debian-tag="${distrib}/%(version)s" \
      --git-tag \
      --git-debian-branch=${distrib}/latest \
      --git-export-dir="$HOME/odr-mmbtools/build-area"
    ```
-1. Send the package to the debian repository
+1. Sign the package:
+   ```
+   debsign --debs-dir ../build-area/${distrib}
+   ```
+1. Send the package to the debian repository:
    ```
    dput \
+     -f \
      mentors \
      $HOME/odr-mmbtools/build-area/${distrib}/${mmbtool_name}*.changes
    ```
@@ -93,14 +97,18 @@ previous build until you are satisfied
    ```
    git commit -a -m "Initial debian package for ${distrib}"
    ```
-1. Build and sign the package
+1. Build the package
    ```
    gbp buildpackage \
-     --git-builder="debspawn build --results-dir=$HOME/odr-mmbtools/build-area/${distrib} --sign ${distrib}" \
+     --git-builder="debspawn build --results-dir=$HOME/odr-mmbtools/build-area/${distrib} ${distrib}" \
      --git-debian-tag="${distrib}/%(version)s" \
      --git-tag \
      --git-debian-branch=${distrib}/latest \
      --git-export-dir="$HOME/odr-mmbtools/build-area"
+   ```
+1. Sign the package:
+   ```
+   debsign --debs-dir ../build-area/${distrib}
    ```
 
 ## Push the repository to salsa.debian.org
