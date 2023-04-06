@@ -65,7 +65,7 @@ previous build until you are satisfied
 1. Create a new branch
    ```
    distrib=bullseye
-   git checkout debian/latest
+   git checkout unstable/latest
    git checkout -b ${distrib}/latest
    ```
 1. Change the debian/changelog file
