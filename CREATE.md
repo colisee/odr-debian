@@ -46,7 +46,8 @@ initial debian package from scratch.
 previous build until you are satisfied
 1. Commit the changes:
    ```
-   git commit -a -m "Initial debian package for ${distrib}"
+   git add debian/
+   git commit -m "Initial debian package for ${distrib}"
    ```
 1. Build the debian package and add a tag:
    ```
@@ -66,7 +67,7 @@ previous build until you are satisfied
    dput \
      -f \
      mentors \
-     $HOME/odr-mmbtools/build-area/${distrib}/${mmbtool_name}*.changes
+     $HOME/odr-mmbtools/build-area/${distrib}/${mmbtool_name}-${mmbtool_version}*.changes
    ```
 
 ## Create the initial debian package for stable (ex: bullseye)
@@ -130,4 +131,3 @@ previous build until you are satisfied
      --tags \
      git@salsa.debian.org:ralex/${mmbtool_name}.git
    ```
-
