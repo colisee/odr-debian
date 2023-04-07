@@ -21,7 +21,7 @@ Run the following commands:
    ```
    cat << 'EOF' >> $HOME/.bashrc
 
-   DEBFULLNAME="Robin ALEXANDER"
+   DEBFULLNAME="Robin Alexander"
    DEBEMAIL="robin.alexander@netplus.ch"
    export DEBEMAIL DEBFULLNAME
    EOF
