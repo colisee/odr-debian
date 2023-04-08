@@ -84,7 +84,7 @@ previous build until you are satisfied
    ```
    git merge upstream/latest
    ```
-1. Change the debian/changelof file
+1. Change the debian/changelog file
    ```
    gbp dch \
      --debian-branch=${distrib}/latest \

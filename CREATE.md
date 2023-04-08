@@ -24,7 +24,6 @@ initial debian package from scratch.
    git init
    gbp import-orig \
      --no-interactive \
-     --upstream-branch=upstream/latest \
      --debian-branch=${distrib}/latest \
      "../${mmbtool_name}_${mmbtool_version}.tar.gz"
    ```
@@ -114,10 +113,6 @@ previous build until you are satisfied
 
 ## Push the repository to salsa.debian.org
 
-1. Get back to the branch unstable/latest
-   ```
-   git checkout unstable/latest
-   ```
 1. Create the remote repository with all branches
    ```
    git push \

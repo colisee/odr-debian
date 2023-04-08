@@ -6,11 +6,9 @@ the environment in charge of handling the debian packages.
 1. Install the following debian packages:
    ```
    sudo apt install --yes \
-     binfmt-support \
      debmake \
      debspawn \
      git-buildpackage \
-     qemu-user-static \
      reprepro
    ```
 
@@ -28,7 +26,7 @@ Run the following commands:
    ```
 1. git
    ```
-   git config --global user.name="Robin ALEXANDER"
+   git config --global user.name="Robin Alexander"
    git config --global user.email="robin.alexander@netplus.ch"
    ```
 1. git-buildpackage
@@ -62,8 +60,6 @@ Run the following commands:
 1. Create the debian build environments for all the distributions and architectures tracked by the Opendigitalradio debian repository:
    ```
    for dist in bullseye unstable; do
-     for arch in amd64 arm64 armhf; do
-       debspawn create --arch=${arch} ${dist}
-     done
+     debspawn create ${dist}
    done
    ```
