@@ -20,19 +20,22 @@ a debian package with a new upstream version.
    gbp clone \
      --all \
      git@salsa.debian.org:ralex/${mmbtool_name}.git
-   
+   ```
+1. Switch to the debian/latest branch
+   ```
    cd ${mmbtool_dir}
+   git checkout debian/latest
    ```
 1. Update with the new upstream version
    ```
    gbp import-orig \
-     --debian-branch=${distrib}/latest \
+     --debian-branch=debian/latest \
      --uscan
    ```
-1. Change the debian/changelof file
+1. Change the debian/changelog file
    ```
    gbp dch \
-     --debian-branch=${distrib}/latest \
+     --debian-branch=debian/latest \
      --distribution=${distrib} \
      --urgency=low \
      --release
@@ -48,16 +51,11 @@ a debian package with a new upstream version.
 previous build until you are satisfied
 1. Commit the changes if you modified any debian-related files
    ```
-   git commit -a -m "Debian files changes induced by new upstream"
+   git commit -am "Debian files changes induced by new upstream"
    ```
-1. Build the package and create a distribution tag
+1. Add the debian tag:
    ```
-   gbp buildpackage \
-     --git-builder="debspawn build --results-dir=$HOME/odr-mmbtools/build-area/${distrib} ${distrib}" \
-     --git-debian-tag="${distrib}/%(version)s" \
-     --git-tag \
-     --git-debian-branch=${distrib}/latest \
-     --git-export-dir="$HOME/odr-mmbtools/build-area"
+   gbp tag --debian-branch=debian/latest
    ```
 1. Sign the package:
    ```
@@ -78,7 +76,7 @@ previous build until you are satisfied
    ```
 1. Switch to the stable branch
    ```
-   git checkout ${distrib}/latest
+   git checkout debian/${distrib}
    ```
 1. Merge upstream
    ```
@@ -87,7 +85,7 @@ previous build until you are satisfied
 1. Change the debian/changelog file
    ```
    gbp dch \
-     --debian-branch=${distrib}/latest \
+     --debian-branch=debian/${distrib} \
      --distribution=${distrib} \
      --urgency=low \
      --release
@@ -103,16 +101,11 @@ previous build until you are satisfied
 previous build until you are satisfied
 1. Commit the changes if you modified any debian-related files
    ```
-   git commit -a -m "Debian files changes induced by new upstream"
+   git commit -am "Debian files changes induced by new upstream"
    ```
-1. Build the package and create a distribution tag
+1. Add the debian tag:
    ```
-   gbp buildpackage \
-     --git-builder="debspawn build --results-dir=$HOME/odr-mmbtools/build-area/${distrib} ${distrib}" \
-     --git-debian-tag="${distrib}/%(version)s" \
-     --git-tag \
-     --git-debian-branch=${distrib}/latest \
-     --git-export-dir="$HOME/odr-mmbtools/build-area"
+   gbp tag --debian-branch=debian/${distrib}
    ```
 1. Sign the package:
    ```

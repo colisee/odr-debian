@@ -24,7 +24,7 @@ initial debian package from scratch.
    git init
    gbp import-orig \
      --no-interactive \
-     --debian-branch=${distrib}/latest \
+     --debian-branch=debian/latest \
      "../${mmbtool_name}_${mmbtool_version}.tar.gz"
    ```
 1. Add the debian template files:
@@ -48,14 +48,9 @@ previous build until you are satisfied
    git add debian/
    git commit -m "Initial debian package for ${distrib}"
    ```
-1. Build the debian package and add a tag:
+1. Add the debian tag:
    ```
-   gbp buildpackage \
-     --git-builder="debspawn build --results-dir=$HOME/odr-mmbtools/build-area/${distrib} ${distrib}" \
-     --git-debian-tag="${distrib}/%(version)s" \
-     --git-tag \
-     --git-debian-branch=${distrib}/latest \
-     --git-export-dir="$HOME/odr-mmbtools/build-area"
+   gbp tag --debian-branch=debian/latest
    ```
 1. Sign the package:
    ```
@@ -77,12 +72,15 @@ previous build until you are satisfied
    ```
 1. Create a new branch
    ```
-   git checkout unstable/latest
-   git checkout -b ${distrib}/latest
+   git checkout debian/latest
+   git checkout -b debian/${distrib}
    ```
-1. Change the debian/changelog file
+1. Change the debian/changelog file (distribution and version)
    ```
-   sed -e "s/unstable/${distrib}/g" -i "debian/changelog"
+   sed \
+     -e "s/unstable/${distrib}/g" \
+     -e "s/(\(.*\))/(\1~deb11u1) \
+     -i "debian/changelog"
    ```
 1. Build the debian package:
    ```
@@ -95,16 +93,11 @@ previous build until you are satisfied
 previous build until you are satisfied
 1. Commit and tag the changes
    ```
-   git commit -a -m "Initial debian package for ${distrib}"
+   git commit -am "Initial debian package for ${distrib}"
    ```
-1. Build the package
+1. Add the debian tag:
    ```
-   gbp buildpackage \
-     --git-builder="debspawn build --results-dir=$HOME/odr-mmbtools/build-area/${distrib} ${distrib}" \
-     --git-debian-tag="${distrib}/%(version)s" \
-     --git-tag \
-     --git-debian-branch=${distrib}/latest \
-     --git-export-dir="$HOME/odr-mmbtools/build-area"
+   gbp tag --debian-branch=debian/${distrib}
    ```
 1. Sign the package:
    ```
