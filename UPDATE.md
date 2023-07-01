@@ -36,7 +36,7 @@ a debian package with a new upstream version.
      --debian-branch=debian/latest \
      --uscan
    ```
-1. Change the debian/changelog file
+1. Change the debian/changelog file if a new upstream version was imported
    ```
    gbp dch \
      --debian-branch=debian/latest \
