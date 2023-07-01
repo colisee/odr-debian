@@ -55,11 +55,11 @@ Run the following commands:
 
 1. Create a dedicated tree structure:
    ```
-   mkdir -p $HOME/odr-mmbtools/build-area/{unstable,bullseye}
+   mkdir -p $HOME/odr-mmbtools/build-area/{unstable,bookworm,bullseye}
    ```
 1. Create the debian build environments for all the distributions and architectures tracked by the Opendigitalradio debian repository:
    ```
-   for dist in bullseye unstable; do
+   for dist in bullseye bookworm unstable; do
      debspawn create ${dist}
    done
    ```
