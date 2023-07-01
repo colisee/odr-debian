@@ -13,17 +13,21 @@ a debian package with a new upstream version.
    ```
    distrib=unstable
    ```
-1. Clone the remote repository (if not present locally)
+1. Clone or update the remote repository
    ```
    cd ${HOME}/odr-mmbtools
-
-   gbp clone \
-     --all \
-     git@salsa.debian.org:ralex/${mmbtool_name}.git
+   if [ -d "${mmbtool_name}" ]; then
+     cd ${mmbtool_dir}
+     gbp pull
+   else
+     gbp clone \
+       --all \
+       git@salsa.debian.org:ralex/${mmbtool_name}.git
+     cd ${mmbtool_dir}
+   fi
    ```
 1. Switch to the debian/latest branch
    ```
-   cd ${mmbtool_dir}
    git checkout debian/latest
    ```
 1. Update with the new upstream version
