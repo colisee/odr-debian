@@ -51,7 +51,7 @@ a debian package with a new upstream version.
 previous build until you are satisfied
 1. Commit the changes if you modified any debian-related files
    ```
-   git commit -am "Debian files changes induced by new upstream"
+   git commit -am "Debian files changes induced by upstream ${mmbtool_version}"
    ```
 1. Add the debian tag:
    ```
@@ -101,7 +101,7 @@ previous build until you are satisfied
 previous build until you are satisfied
 1. Commit the changes if you modified any debian-related files
    ```
-   git commit -am "Debian files changes induced by new upstream"
+   git commit -am "Debian files changes induced by upstream ${mmbtool_version}"
    ```
 1. Add the debian tag:
    ```
