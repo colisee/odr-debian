@@ -54,7 +54,7 @@ previous build until you are satisfied
    ```
 1. Sign the package:
    ```
-   debsign --debs-dir ../build-area/${distrib}
+   debsign ../build-area/${distrib}/${mmbtool_name}*.changes
    ```
 1. Send the package to the debian repository:
    ```
