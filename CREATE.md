@@ -79,7 +79,7 @@ previous build until you are satisfied
    ```
    sed \
      -e "s/unstable/${distrib}/g" \
-     -e "s/(\(.*\))/(\1~deb11u1) \
+     -e "s/(\(.*\))/(\1~deb11u1)/g" \
      -i "debian/changelog"
    ```
 1. Build the debian package:
