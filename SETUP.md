@@ -26,8 +26,8 @@ Run the following commands:
    ```
 1. git
    ```
-   git config --global user.name="Robin Alexander"
-   git config --global user.email="robin.alexander@netplus.ch"
+   git config --global user.name "Robin Alexander"
+   git config --global user.email "robin.alexander@netplus.ch"
    ```
 1. git-buildpackage
    ```
