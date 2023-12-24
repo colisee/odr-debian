@@ -37,7 +37,6 @@ initial debian package from scratch.
 1. Build the debian package:
    ```
    gbp buildpackage \
-     --git-builder="debspawn build --results-dir=$HOME/odr-mmbtools/build-area/${distrib} --lintian ${distrib}" \
      --git-export=WC \
      --git-export-dir="$HOME/odr-mmbtools/build-area"
    ```
@@ -85,7 +84,6 @@ previous build until you are satisfied
 1. Build the debian package:
    ```
    gbp buildpackage \
-     --git-builder="debspawn build --results-dir=$HOME/odr-mmbtools/build-area/${distrib} --lintian ${distrib}" \
      --git-export=WC \
      --git-export-dir="$HOME/odr-mmbtools/build-area"
    ```
