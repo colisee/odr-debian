@@ -37,19 +37,23 @@ initial debian package from scratch.
 1. Build the debian package:
    ```
    gbp buildpackage \
-     --git-export=WC \
-     --git-export-dir="$HOME/odr-mmbtools/build-area"
+     --git-builder="sbuild --dist=unstable --build-dir=$HOME/odr-mmbtools/build-area/unstable" \
+     --git-debian-branch=debian/latest \
+     --git-ignore-new
    ```
 1. Verify the results from lintian, fix the problems if any and repeat the 
 previous build until you are satisfied
 1. Commit the changes:
    ```
    git add debian/
-   git commit -m "Initial debian package for ${distrib}"
+   git commit -m "Initial debian package"
    ```
-1. Add the debian tag:
+1. Create the final build and tag the debian release:
    ```
-   gbp tag --debian-branch=debian/latest
+   gbp buildpackage \
+     --git-builder="sbuild --dist=unstable --build-dir=$HOME/odr-mmbtools/build-area/unstable" \
+     --git-debian-branch=debian/latest \
+     --git-tag
    ```
 1. Sign the package:
    ```
@@ -61,45 +65,6 @@ previous build until you are satisfied
      -f \
      mentors \
      $HOME/odr-mmbtools/build-area/${distrib}/${mmbtool_name}-${mmbtool_version}*.changes
-   ```
-
-## Create the initial debian package for stable (ex: bullseye)
-
-1. Set distribution name
-   ```
-   distrib=bullseye
-   ```
-1. Create a new branch
-   ```
-   git checkout debian/latest
-   git checkout -b debian/${distrib}
-   ```
-1. Change the debian/changelog file (distribution and version)
-   ```
-   sed \
-     -e "s/unstable/${distrib}/g" \
-     -e "s/(\(.*\))/(\1~deb11u1)/g" \
-     -i "debian/changelog"
-   ```
-1. Build the debian package:
-   ```
-   gbp buildpackage \
-     --git-export=WC \
-     --git-export-dir="$HOME/odr-mmbtools/build-area"
-   ```
-1. Verify the results from lintian, fix the problems if any and repeat the 
-previous build until you are satisfied
-1. Commit and tag the changes
-   ```
-   git commit -am "Initial debian package for ${distrib}"
-   ```
-1. Add the debian tag:
-   ```
-   gbp tag --debian-branch=debian/${distrib}
-   ```
-1. Sign the package:
-   ```
-   debsign --debs-dir ../build-area/${distrib}
    ```
 
 ## Push the repository to salsa.debian.org
