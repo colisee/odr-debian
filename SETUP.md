@@ -20,15 +20,15 @@ Run the following commands:
    ```
    cat << 'EOF' >> $HOME/.bashrc
 
-   DEBFULLNAME="Robin Alexander"
-   DEBEMAIL="robin.alexander@netplus.ch"
+   DEBFULLNAME="First_name Last_name"
+   DEBEMAIL="Your_email"
    export DEBEMAIL DEBFULLNAME
    EOF
    ```
 1. git
    ```
-   git config --global user.name "Robin Alexander"
-   git config --global user.email "robin.alexander@netplus.ch"
+   git config --global user.name "First_name Last_name"
+   git config --global user.email "Your_email"
    ```
 1. sbuild
    ```
