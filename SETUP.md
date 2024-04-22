@@ -18,7 +18,7 @@ the environment in charge of handling the debian packages.
 Run the following commands:
 1. shell variables
    ```
-   cat << 'EOF' >> $HOME/.bashrc
+   tee $HOME/.bashrc << EOF
 
    DEBFULLNAME="First_name Last_name"
    DEBEMAIL="Your_email"
@@ -32,7 +32,7 @@ Run the following commands:
    ```
 1. sbuild
    ```
-   cat >~/.sbuildrc << 'EOF'
+   tee $HOME/.sbuildrc << EOF
    ##############################################################################
    # PACKAGE BUILD RELATED (source-only-upload as default)
    ##############################################################################
@@ -66,7 +66,7 @@ Run the following commands:
    ```
 1. git-buildpackage
    ```
-   cat << 'EOF' > $HOME/.gbp.conf
+   tee $HOME/.gbp.conf << EOF
    [DEFAULT]
    builder = sbuild
    pristine-tar = True
@@ -75,7 +75,7 @@ Run the following commands:
    ```
 1. dput
    ```
-   cat << 'EOF' > $HOME/.dput.cf
+   tee $HOME/.dput.cf << EOF
    [mentors]
    fqdn = mentors.debian.net
    incoming = /upload
