@@ -71,14 +71,9 @@ previous build until you are satisfied
 
 1. Create the remote repository with all branches
    ```
-   git push \
-     --all \
-     --set-upstream \
-     git@salsa.debian.org:ralex/${mmbtool_name}.git
+   git push --all --set-upstream git@salsa.debian.org:ralex/${mmbtool_name}.git
    ```
 1. Push all the tags to the remore repository
    ```
-   git push \
-     --tags \
-     git@salsa.debian.org:ralex/${mmbtool_name}.git
+   git push --tags
    ```
