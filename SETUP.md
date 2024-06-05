@@ -7,7 +7,6 @@ the environment in charge of handling the debian packages.
    ```
    sudo apt install --yes \
      debhelper \
-     devscripts \
      sbuild \
      git-buildpackage \
      reprepro
