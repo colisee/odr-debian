@@ -63,14 +63,14 @@ previous build until you are satisfied
    ```
 1. Sign the package:
    ```
-   debsign ../build-area/${distrib}/${mmbtool_name}*.changes
+   debsign ../build/${mmbtool_name}*.changes
    ```
 1. Send the package to the debian repository:
    ```
    dput \
      -f \
      mentors \
-     $HOME/odr-mmbtools/build-area/${distrib}/${mmbtool_name}-${mmbtool_version}*.changes
+     ../build/${mmbtool_name}-${mmbtool_version}*.changes
    ```
 
 ## Push the repository to salsa.debian.org
