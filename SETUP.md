@@ -65,7 +65,7 @@ Run the following commands:
    ```
 1. git-buildpackage
    ```
-   tee $HOME/.gbp.conf << EOF
+   tee $HOME/.gbp.conf << 'EOF'
    [DEFAULT]
    builder = sbuild
    pristine-tar = True
@@ -74,7 +74,7 @@ Run the following commands:
    ```
 1. dput
    ```
-   tee $HOME/.dput.cf << EOF
+   tee $HOME/.dput.cf << 'EOF'
    [mentors]
    fqdn = mentors.debian.net
    incoming = /upload
