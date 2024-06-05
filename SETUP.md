@@ -15,21 +15,21 @@ the environment in charge of handling the debian packages.
 ## Software configuration
 
 Run the following commands:
-1. shell variables
+1. Set shell variables
    ```
-   tee $HOME/.bashrc << EOF
+   cat >> $HOME/.profile << 'EOF'
 
    DEBFULLNAME="First_name Last_name"
    DEBEMAIL="Your_email"
-   export DEBEMAIL DEBFULLNAME
+   export DEBFULLNAME DEBEMAIL
    EOF
    ```
-1. git
+1. Set git defaults
    ```
    git config --global user.name "First_name Last_name"
    git config --global user.email "Your_email"
    ```
-1. sbuild
+1. Set sbuild defaults
    ```
    tee $HOME/.sbuildrc << 'EOF'
    ##############################################################################
@@ -63,7 +63,7 @@ Run the following commands:
    1;
    EOF
    ```
-1. git-buildpackage
+1. Set git-buildpackage defaults
    ```
    tee $HOME/.gbp.conf << 'EOF'
    [DEFAULT]
@@ -72,7 +72,7 @@ Run the following commands:
    upstream-branch = upstream/latest
    EOF
    ```
-1. dput
+1. Set dput defaults
    ```
    tee $HOME/.dput.cf << 'EOF'
    [mentors]
