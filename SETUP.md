@@ -31,7 +31,7 @@ Run the following commands:
    ```
 1. sbuild
    ```
-   tee $HOME/.sbuildrc << EOF
+   tee $HOME/.sbuildrc << 'EOF'
    ##############################################################################
    # PACKAGE BUILD RELATED (source-only-upload as default)
    ##############################################################################
