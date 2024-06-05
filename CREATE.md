@@ -40,8 +40,9 @@ initial debian package from scratch.
 1. Build the debian package:
    ```
    gbp buildpackage \
-     --git-builder="sbuild --dist=unstable --build-dir=$HOME/odr-mmbtools/build-area/unstable" \
      --git-debian-branch=debian/latest \
+     --git-export \
+     --git-export-dir=../build/${mmbtool_name} \
      --git-ignore-new
    ```
 1. Verify the results from lintian, fix the problems if any and repeat the 
@@ -54,8 +55,9 @@ previous build until you are satisfied
 1. Create the final build and tag the debian release:
    ```
    gbp buildpackage \
-     --git-builder="sbuild --dist=unstable --build-dir=$HOME/odr-mmbtools/build-area/unstable" \
      --git-debian-branch=debian/latest \
+     --git-export \
+     --git-export-dir=../build/${mmbtool_name} \
      --git-tag
    ```
 1. Sign the package:
