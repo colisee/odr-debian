@@ -3,19 +3,22 @@ initial debian package from scratch.
 
 ## Create the initial debian package for unstable
 
-1. Set working variables
+1. Set the tool name
    ```
    mmbtool_name=odr-audioenc
-   mmbtool_version=3.3.1
-   mmbtool_dir="${HOME}/odr-mmbtools/${mmbtool_name}"
-   upstream="https://github.com/Opendigitalradio/${mmbtool_name}/archive/refs/tags/v${mmbtool_version}.tar.gz"
    ```
-1. Set distribution name
+1. Set the tool version
+   ```
+   mmbtool_version=3.3.1
+   ```
+1. Set the distribution name
    ```
    distrib=unstable
    ```
 1. Create the initial debianized git environment:
    ```
+   mmbtool_dir="${HOME}/odr-mmbtools/${mmbtool_name}"
+   upstream="https://github.com/Opendigitalradio/${mmbtool_name}/archive/refs/tags/v${mmbtool_version}.tar.gz"
    mkdir -p "${mmbtool_dir}"
    cd "${mmbtool_dir}"
    wget \
