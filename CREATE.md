@@ -51,7 +51,7 @@ previous build until you are satisfied
 1. Commit the changes:
    ```
    git add debian/
-   git commit -m "Initial debian package"
+   git commit -m "Initial release"
    ```
 1. Create the final build and tag the debian release:
    ```
