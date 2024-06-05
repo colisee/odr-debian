@@ -29,6 +29,7 @@ initial debian package from scratch.
      --no-interactive \
      --debian-branch=debian/latest \
      "../${mmbtool_name}_${mmbtool_version}.tar.gz"
+   rm ../${mmbtool_name}_${mmbtool_version}*.tar.gz
    ```
 1. Add the debian template files:
    ```
