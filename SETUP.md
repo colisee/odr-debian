@@ -6,6 +6,7 @@ the environment in charge of handling the debian packages.
 1. Install the following debian packages:
    ```
    sudo apt install --yes \
+     debmake \
      debhelper \
      sbuild \
      git-buildpackage \
