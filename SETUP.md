@@ -91,20 +91,28 @@ Run the following commands:
 
 1. Create a dedicated tree structure:
    ```
-   mkdir -p $HOME/odr-mmbtools/build-area/{unstable,bookworm,bullseye}
+   mkdir -p $HOME/odr-mmbtools/build
    ```
 1. join the `sbuild` group
    ```
    sudo sbuild-adduser $LOGNAME
    sudo newgrp sbuild
    ```
-1. Create the debian build environments for all the distributions and architectures tracked by the Opendigitalradio debian repository:
+1. Create the debian build environment for unstable:
    ```
-   for dist in bullseye bookworm unstable; do
-     sudo sbuild-createchroot \
-       --include=eatmydata,ccache \
-       ${dist} \
-       /srv/chroot/${dist}-amd64-sbuild \
-       http://ftp.us.debian.org/debian
-   done
+   sudo sbuild-createchroot \
+     --include=eatmydata,ccache \
+     unstable \
+     /srv/chroot/unstable-amd64-sbuild \
+    http://deb.debian.org/debian
+   ```
+1. Create the debian build environment for bookworm-backports:
+   ```
+   sudo sbuild-createchroot \
+     --extra-repository="deb http://deb.debian.org/debian bookworm-backports main" \
+     --chroot-prefix=bookworm-backports \ 
+     --include=eatmydata,ccache \
+     bookworm \
+     /srv/chroot/bookworm-backports-amd64-sbuild \
+    http://deb.debian.org/debian
    ```
