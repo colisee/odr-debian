@@ -44,6 +44,7 @@ initial debian package from scratch.
      --git-debian-branch=debian/latest \
      --git-export \
      --git-export-dir=../build/${mmbtool_name} \
+     --git-build="sbuild --build-dir=../build/${mmbtool_name}" \
      --git-ignore-new
    ```
 1. Verify the results from lintian, fix the problems if any and repeat the 
@@ -59,6 +60,7 @@ previous build until you are satisfied
      --git-debian-branch=debian/latest \
      --git-export \
      --git-export-dir=../build/${mmbtool_name} \
+     --git-build="sbuild --build-dir=../build/${mmbtool_name}" \
      --git-tag
    ```
 1. Sign the package:
