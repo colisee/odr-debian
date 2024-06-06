@@ -3,13 +3,13 @@ a debian package with a new upstream version.
 
 ## Update unstable/latest
 
-1. Set working variables
+1. Set the working variables
    ```
    mmbtool_name=odr-audioenc
    mmbtool_version=3.3.1
    mmbtool_dir="${HOME}/odr-mmbtools/${mmbtool_name}"
    ```
-1. Set distribution name
+1. Set the distribution name
    ```
    distrib=unstable
    ```
@@ -35,6 +35,10 @@ a debian package with a new upstream version.
    gbp import-orig \
      --debian-branch=debian/latest \
      --uscan
+   ```
+1. Update the sbuild environment:
+   ```
+   sudo sbuild-update --update --dist-upgrade --clean --autoclean --autoremove ${distrib}
    ```
 1. Change the debian/changelog file if a new upstream version was imported
    ```
