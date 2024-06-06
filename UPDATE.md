@@ -1,7 +1,7 @@
 This document describes the steps required to update
 a debian package with a new upstream version.
 
-## Update unstable/latest
+## unstable
 
 1. Set the working variables
    ```
@@ -40,42 +40,46 @@ a debian package with a new upstream version.
    ```
    sudo sbuild-update --update --dist-upgrade --clean --autoclean --autoremove ${distrib}
    ```
-1. Change the debian/changelog file if a new upstream version was imported
+1. Change the debian/changelog using temporary snapshots
+   ```
+   gbp dch \
+     --debian-branch=debian/latest \
+     --snapshot
+   ```
+1. Build the debian package:
+   ```
+   gbp buildpackage \
+     --git-builder="sbuild --build-dir=../build" \
+     --git-debian-branch=debian/latest \
+     --git-ignore-new
+   ```
+1. Verify the results from lintian, fix the problems if any and repeat the 
+previous build until you are satisfied. Ignore issues with debian/changelog. For each fixed issue,
+perform a git commit.
+1 Finalize the debian/changelog
    ```
    gbp dch \
      --debian-branch=debian/latest \
      --distribution=${distrib} \
      --urgency=low \
+     --commit \
      --release
-   ```
-1. Build the debian package:
-   ```
-   gbp buildpackage \
-     --git-builder="sbuild --dist=unstable --build-dir=$HOME/odr-mmbtools/build-area/unstable" \
-     --git-debian-branch=debian/latest \
-     --git-ignore-new
-   ```
-1. Verify the results from lintian, fix the problems if any and repeat the 
-previous build until you are satisfied
-1. Commit the changes if you modified any debian-related files
-   ```
-   git commit -am "Debian files changes induced by upstream ${mmbtool_version}"
    ```
 1. Create the final build and tag the release:
    ```
    gbp buildpackage \
-     --git-builder="sbuild --dist=unstable --build-dir=$HOME/odr-mmbtools/build-area/unstable" \
+     --git-builder="sbuild --build-dir=../build" \
      --git-debian-branch=debian/latest \
      --git-tag
    ```
 1. Sign the package:
    ```
-   debsign ../build-area/${distrib}/${mmbtool_name}*.changes
+   debsign ../build/${mmbtool_name}_${mmbtool_version}*.changes
    ```
 1. Send the package to the debian repository
    ```
    dput \
      -f
      mentors \
-     $HOME/odr-mmbtools/build-area/${distrib}/${mmbtool_name}*.changes
+     ../build/${mmbtool_name}_${mmbtool_version}*.changes
    ```
