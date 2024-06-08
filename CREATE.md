@@ -114,19 +114,17 @@ As of June 2024, stable-backports points to `bookworm-backports`.
    ```
 1. Verify the results from lintian, fix the problems if any and repeat the 
 previous build until you are satisfied
-1. Commit the changes:
+1. Commit the changes
+1. Commit the changes in `debian/changelog`
    ```
-   git add debian/
-   git commit -m "Initial release"
+   git add debian/changelog
+   git commit -m "Rebuild for bookworm-backports"
    ```
-1. Create the final build and tag the debian release:
+1. Tag the debian release:
    ```
    gbp buildpackage \
      --git-debian-branch=debian/bookworm-backports \
-     --git-export \
-     --git-export-dir=../build \
-     --git-build="sbuild --build-dir=../build" \
-     --git-tag
+     --git-tag-only
    ```
 1. Sign the package:
    ```
