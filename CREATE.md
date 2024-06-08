@@ -86,3 +86,56 @@ Once the package is included in unstable, you can update the git repository in s
    ```
    git push --tags
    ```
+
+## Create the initial debian package for stable-backports
+As of June 2024, stable-backports points to `bookworm-backports`.
+
+1. Create and checkout the bookworm-backports branch:
+   ```
+   git checkout debian/latest
+   git checkout -b debian/bookworm-backports
+   ```
+1. Update the `debian/changelog` file:
+   ```
+   gbp dch \
+     --bpo \
+     --debian-branch=debian/bookworm-backports \
+     --distribution=bookworm-backports
+   ```
+1. Apply the checklist
+1. Build the debian package:
+   ```
+   gbp buildpackage \
+     --git-debian-branch=debian/bookworm-backports \
+     --git-export \
+     --git-export-dir=../build \
+     --git-build="sbuild --build-dir=../build" \
+     --git-ignore-new
+   ```
+1. Verify the results from lintian, fix the problems if any and repeat the 
+previous build until you are satisfied
+1. Commit the changes:
+   ```
+   git add debian/
+   git commit -m "Initial release"
+   ```
+1. Create the final build and tag the debian release:
+   ```
+   gbp buildpackage \
+     --git-debian-branch=debian/bookworm-backports \
+     --git-export \
+     --git-export-dir=../build \
+     --git-build="sbuild --build-dir=../build" \
+     --git-tag
+   ```
+1. Sign the package:
+   ```
+   debsign ../build/${mmbtool_name}_${mmbtool_version}*.changes
+   ```
+1. Send the package to the debian repository:
+   ```
+   dput \
+     -f \
+     mentors \
+     ../build/${mmbtool_name}_${mmbtool_version}*.changes
+   ```
