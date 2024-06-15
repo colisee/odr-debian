@@ -135,5 +135,5 @@ previous build until you are satisfied
    dput \
      -f \
      mentors \
-     ../build/${mmbtool_name}_${mmbtool_version}*.changes
+     ../build/${mmbtool_name}_${mmbtool_version}*_source.changes
    ```
