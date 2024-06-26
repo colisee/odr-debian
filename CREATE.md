@@ -27,6 +27,7 @@ initial debian package from scratch.
    git init
    gbp import-orig \
      --no-interactive \
+     --upstream-branch=upstream/latest \
      --debian-branch=debian/latest \
      "../${mmbtool_name}_${mmbtool_version}.tar.gz"
    rm ../${mmbtool_name}_${mmbtool_version}*.tar.gz
