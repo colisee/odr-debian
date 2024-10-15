@@ -15,7 +15,7 @@ a debian package with a new upstream version.
    ```
 1. Clone or update the remote repository
    ```
-   cd ${HOME}/odr-mmbtools
+   cd $(dirname "${mmbtool_dir}")
    if [ -d "${mmbtool_name}" ]; then
      cd ${mmbtool_dir}
      gbp pull
