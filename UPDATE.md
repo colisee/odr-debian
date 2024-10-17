@@ -74,12 +74,12 @@ perform a git commit.
    ```
 1. Sign the package:
    ```
-   debsign ../build/${mmbtool_name}_${mmbtool_version}*.changes
+   debsign ../build/${mmbtool_name}_${mmbtool_version}*source.changes
    ```
 1. Send the package to the debian repository
    ```
    dput \
      -f
      mentors \
-     ../build/${mmbtool_name}_${mmbtool_version}*_source.changes
+     ../build/${mmbtool_name}_${mmbtool_version}*source.changes
    ```
