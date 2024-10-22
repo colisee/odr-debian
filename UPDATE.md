@@ -59,7 +59,7 @@ perform a git commit
 
 1. Verify the [Check-list](CHECKLIST.md) and perform a git commit, if applicable
 
-1 Finalize the debian/changelog
+1. Finalize the debian/changelog
    ```
    gbp dch \
      --debian-branch=debian/latest \
