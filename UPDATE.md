@@ -55,7 +55,10 @@ a debian package with a new upstream version.
    ```
 1. Verify the results from lintian, fix the problems if any and repeat the 
 previous build until you are satisfied. Ignore issues with debian/changelog. For each fixed issue,
-perform a git commit.
+perform a git commit
+
+1. Verify the [Check-list](CHECKLIST.md) and perform a git commit, if applicable
+
 1 Finalize the debian/changelog
    ```
    gbp dch \
