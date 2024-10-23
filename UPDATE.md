@@ -86,3 +86,7 @@ perform a git commit
      mentors \
      ../build/${mmbtool_name}_${mmbtool_version}*source.changes
    ```
+
+## Update the repository in Salsa
+
+Follow [these instructions](SALSA.md)
