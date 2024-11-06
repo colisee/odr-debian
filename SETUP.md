@@ -95,6 +95,8 @@ Run the following commands:
    ```
    sudo sbuild-createchroot \
      --include=eatmydata,ccache \
+     --alias=sid \
+     --alias=UNRELEASED \
      unstable \
      /srv/chroot/unstable-amd64-sbuild \
     http://deb.debian.org/debian
@@ -102,7 +104,7 @@ Run the following commands:
 1. Create the debian build environment for bookworm-backports:
    ```
    sudo sbuild-createchroot \
-     --extra-repository="deb http://deb.debian.org/debian bookworm-backports main" \
+     --extra-repository="deb http://deb.debian.org/debian bookworm-backports main non-free" \
      --chroot-prefix=bookworm-backports \ 
      --include=eatmydata,ccache \
      bookworm \

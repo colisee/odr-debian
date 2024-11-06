@@ -75,18 +75,11 @@ perform a git commit
      --git-debian-branch=debian/latest \
      --git-tag
    ```
-1. Sign the package:
-   ```
-   debsign ../build/${mmbtool_name}_${mmbtool_version}*source.changes
-   ```
-1. Send the package to the debian repository
-   ```
-   dput \
-     -f
-     mentors \
-     ../build/${mmbtool_name}_${mmbtool_version}*source.changes
-   ```
+1. [Send the package to debian mentors](MENTORS.md)
+1. Once the package lands in the testing/backports repository,
+[push the local repository to debian salsa](SALSA.md)
 
-## Update the repository in Salsa
+## Update the debian package for backports
 
-Follow [these instructions](SALSA.md)
+Once your debian package is available in `testing`, you can [update the 
+package for backports](BACKPORTS.md)
