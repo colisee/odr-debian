@@ -49,7 +49,6 @@ a debian package with a new upstream version.
 1. Build the debian package:
    ```
    gbp buildpackage \
-     --git-builder="sbuild --build-dir=../build" \
      --git-debian-branch=debian/latest \
      --git-ignore-new
    ```
@@ -71,7 +70,6 @@ perform a git commit
 1. Create the final build and tag the release:
    ```
    gbp buildpackage \
-     --git-builder="sbuild --build-dir=../build" \
      --git-debian-branch=debian/latest \
      --git-tag
    ```

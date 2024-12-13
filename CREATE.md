@@ -45,7 +45,6 @@ initial debian package from scratch.
      --git-debian-branch=debian/latest \
      --git-export \
      --git-export-dir=../build \
-     --git-build="sbuild --build-dir=../build" \
      --git-ignore-new
    ```
 1. Verify the results from lintian, fix the problems if any and repeat the 
@@ -61,7 +60,6 @@ previous build until you are satisfied
      --git-debian-branch=debian/latest \
      --git-export \
      --git-export-dir=../build \
-     --git-build="sbuild --build-dir=../build" \
      --git-tag
    ```
 1. [Send the package to debian mentors](MENTORS.md)

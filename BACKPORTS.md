@@ -28,7 +28,6 @@ As of June 2024, stable-backports points to `bookworm-backports`.
      --git-debian-branch=debian/bookworm-backports \
      --git-export \
      --git-export-dir=../build \
-     --git-build="sbuild --build-dir=../build" \
      --git-ignore-new
    ```
 1. Verify the results from lintian, fix the problems if any and repeat the 
