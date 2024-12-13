@@ -10,7 +10,7 @@ the environment in charge of handling the debian packages.
      debmake \
      dput \
      git-buildpackage \
-     sbuild \
+     sbuild
    ```
 
 ## Software configuration
