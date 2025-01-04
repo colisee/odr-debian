@@ -3,7 +3,7 @@ debian package to debian mentors.
 
 1. Remove the snapshot artifacts
    ```
-   rm ../${mmbtool_name}_${mmbtool_version}*gbp*
+   rm ../${pkg_name}_${pkg_version}*gbp*
    ```
 1. Sign the package:
    ```
@@ -12,5 +12,5 @@ debian package to debian mentors.
 1. Send the package to the debian repository:
    ```
    dput \
-     ../${mmbtool_name}_${mmbtool_version}*source.changes
+     ../${pkg_name}_${pkg_version}*source.changes
    ```

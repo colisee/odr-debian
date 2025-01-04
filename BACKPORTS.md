@@ -46,12 +46,12 @@ previous build until you are satisfied
    ```
 1. Sign the package:
    ```
-   debsign ../build/${mmbtool_name}_${mmbtool_version}*source.changes
+   debsign ../build/${pkg_name}_${pkg_version}*source.changes
    ```
 1. Send the package to the debian repository:
    ```
    dput \
      -f \
      mentors \
-     ../build/${mmbtool_name}_${mmbtool_version}*source.changes
+     ../build/${pkg_name}_${pkg_version}*source.changes
    ```

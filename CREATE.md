@@ -5,11 +5,11 @@ initial debian package from scratch.
 
 1. Set the tool name
    ```
-   mmbtool_name=odr-audioenc
+   pkg_name=odr-audioenc
    ```
 1. Set the tool version
    ```
-   mmbtool_version=3.3.1
+   pkg_version=3.3.1
    ```
 1. Set the distribution name
    ```
@@ -17,26 +17,26 @@ initial debian package from scratch.
    ```
 1. Create the initial debianized git environment:
    ```
-   mmbtool_dir="${HOME}/dev/debian/${mmbtool_name}"
-   upstream="https://github.com/Opendigitalradio/${mmbtool_name}/archive/refs/tags/v${mmbtool_version}.tar.gz"
-   mkdir -p "${mmbtool_dir}"
-   cd "${mmbtool_dir}"
+   pkg_dir="${HOME}/dev/debian/${pkg_name}"
+   upstream="https://github.com/Opendigitalradio/${pkg_name}/archive/refs/tags/v${pkg_version}.tar.gz"
+   mkdir -p "${pkg_dir}"
+   cd "${pkg_dir}"
    wget \
-     --output-document="../${mmbtool_name}_${mmbtool_version}.tar.gz" \
+     --output-document="../${pkg_name}_${pkg_version}.tar.gz" \
      ${upstream}
    git init
    gbp import-orig \
      --no-interactive \
      --upstream-branch=upstream/latest \
      --debian-branch=debian/latest \
-     "../${mmbtool_name}_${mmbtool_version}.tar.gz"
-   rm ../${mmbtool_name}_${mmbtool_version}*.tar.gz
+     "../${pkg_name}_${pkg_version}.tar.gz"
+   rm ../${pkg_name}_${pkg_version}*.tar.gz
    ```
 1. Add the debian template files:
    ```
    debmake \
-     --package ${mmbtool_name} \
-     --upstreamversion ${mmbtool_version}
+     --package ${pkg_name} \
+     --upstreamversion ${pkg_version}
    ```
 1. Review and complete the content of the debian directory. Check the [Guide for Debian Maintainer](https://www.debian.org/doc/manuals/debmake-doc/index.en.html)
 1. Build the debian package:

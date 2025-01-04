@@ -5,9 +5,9 @@ a debian package with a new upstream version.
 
 1. Set the working variables
    ```
-   mmbtool_name=odr-audioenc
-   mmbtool_version=3.3.1
-   mmbtool_dir="${HOME}/dev/debian/${mmbtool_name}"
+   pkg_name=odr-audioenc
+   pkg_version=3.3.1
+   pkg_dir="${HOME}/dev/debian/${pkg_name}"
    ```
 1. Set the distribution name
    ```
@@ -15,15 +15,15 @@ a debian package with a new upstream version.
    ```
 1. Clone or update the remote repository
    ```
-   cd $(dirname "${mmbtool_dir}")
-   if [ -d "${mmbtool_name}" ]; then
-     cd ${mmbtool_dir}
+   cd $(dirname "${pkg_dir}")
+   if [ -d "${pkg_name}" ]; then
+     cd ${pkg_dir}
      gbp pull
    else
      gbp clone \
        --all \
-       git@salsa.debian.org:ralex/${mmbtool_name}.git
-     cd ${mmbtool_dir}
+       git@salsa.debian.org:ralex/${pkg_name}.git
+     cd ${pkg_dir}
    fi
    ```
 1. Switch to the debian/latest branch
