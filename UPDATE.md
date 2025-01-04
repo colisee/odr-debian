@@ -7,7 +7,7 @@ a debian package with a new upstream version.
    ```
    mmbtool_name=odr-audioenc
    mmbtool_version=3.3.1
-   mmbtool_dir="${HOME}/odr-mmbtools/${mmbtool_name}"
+   mmbtool_dir="${HOME}/dev/debian/${mmbtool_name}"
    ```
 1. Set the distribution name
    ```

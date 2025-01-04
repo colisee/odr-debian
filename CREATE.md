@@ -17,7 +17,7 @@ initial debian package from scratch.
    ```
 1. Create the initial debianized git environment:
    ```
-   mmbtool_dir="${HOME}/odr-mmbtools/${mmbtool_name}"
+   mmbtool_dir="${HOME}/dev/debian/${mmbtool_name}"
    upstream="https://github.com/Opendigitalradio/${mmbtool_name}/archive/refs/tags/v${mmbtool_version}.tar.gz"
    mkdir -p "${mmbtool_dir}"
    cd "${mmbtool_dir}"

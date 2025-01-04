@@ -84,7 +84,7 @@ Run the following commands:
 
 1. Create a dedicated tree structure:
    ```
-   mkdir -p $HOME/odr-mmbtools/build
+   mkdir -p $HOME/dev/debian/build
    ```
 1. join the `sbuild` group
    ```
