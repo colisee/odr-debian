@@ -84,7 +84,7 @@ Run the following commands:
 
 1. Create a dedicated tree structure:
    ```
-   mkdir -p $HOME/dev/debian/build
+   mkdir -p $HOME/dev/debian
    ```
 1. join the `sbuild` group
    ```
@@ -105,7 +105,7 @@ Run the following commands:
    ```
    sudo sbuild-createchroot \
      --extra-repository="deb http://deb.debian.org/debian bookworm-backports main non-free" \
-     --chroot-prefix=bookworm-backports \ 
+     --chroot-prefix=bookworm-backports \
      --include=eatmydata,ccache \
      bookworm \
      /srv/chroot/bookworm-backports-amd64-sbuild \
