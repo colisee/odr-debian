@@ -3,11 +3,13 @@ a debian package with a new upstream version.
 
 ## unstable
 
-1. Set the working variables
+1. Set the package name
    ```
    pkg_name=odr-audioenc
+   ```
+1. Set the package version
+   ```
    pkg_version=3.3.1
-   pkg_dir="${HOME}/dev/debian/${pkg_name}"
    ```
 1. Set the distribution name
    ```
@@ -17,13 +19,13 @@ a debian package with a new upstream version.
    ```
    cd $(dirname "${pkg_dir}")
    if [ -d "${pkg_name}" ]; then
-     cd ${pkg_dir}
+     cd "${pkg_dir}"
      gbp pull
    else
      gbp clone \
        --all \
        git@salsa.debian.org:ralex/${pkg_name}.git
-     cd ${pkg_dir}
+     cd "${pkg_dir}"
    fi
    ```
 1. Switch to the debian/latest branch
@@ -77,7 +79,7 @@ perform a git commit
 1. Once the package lands in the testing/backports repository,
 [push the local repository to debian salsa](SALSA.md)
 
-## Update the debian package for backports
+## backports
 
 Once your debian package is available in `testing`, you can [update the 
 package for backports](BACKPORTS.md)

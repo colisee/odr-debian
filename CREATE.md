@@ -1,13 +1,13 @@
 This document describes the steps required to create the
 initial debian package from scratch.
 
-## Create the initial debian package for unstable
+## unstable
 
-1. Set the tool name
+1. Set the package name
    ```
    pkg_name=odr-audioenc
    ```
-1. Set the tool version
+1. Set the package version
    ```
    pkg_version=3.3.1
    ```
@@ -66,7 +66,7 @@ previous build until you are satisfied
 1. Once the package lands in the testing/backports repository,
 [push the local repository to debian salsa](SALSA.md)
 
-## Create the initial debian package for backports
+## backports
 
 Once your debian package is available in `testing`, you can [create the 
 package for backports](BACKPORTS.md)
