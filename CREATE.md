@@ -1,8 +1,7 @@
 This document describes the steps required to create the
 initial debian package from scratch.
 
-## unstable
-
+## common
 1. Set the package name
    ```
    pkg_name=odr-audioenc
@@ -11,9 +10,15 @@ initial debian package from scratch.
    ```
    pkg_version=3.3.1
    ```
+
+## unstable
 1. Set the distribution name
    ```
    distrib=unstable
+   ```
+1. Update the sbuild environment:
+   ```
+   sudo sbuild-update --update --dist-upgrade --clean --autoclean --autoremove ${distrib}
    ```
 1. Create the initial debianized git environment:
    ```
@@ -43,8 +48,6 @@ initial debian package from scratch.
    ```
    gbp buildpackage \
      --git-debian-branch=debian/latest \
-     --git-export \
-     --git-export-dir=../build \
      --git-ignore-new
    ```
 1. Verify the results from lintian, fix the problems if any and repeat the 
@@ -58,15 +61,60 @@ previous build until you are satisfied
    ```
    gbp buildpackage \
      --git-debian-branch=debian/latest \
-     --git-export \
-     --git-export-dir=../build \
      --git-tag
    ```
 1. [Send the package to debian mentors](MENTORS.md)
-1. Once the package lands in the testing/backports repository,
+1. Once the package lands in the testing repository,
 [push the local repository to debian salsa](SALSA.md)
 
 ## backports
-
-Once your debian package is available in `testing`, you can [create the 
-package for backports](BACKPORTS.md)
+Once your debian package is available in `testing`, you can create the 
+package for backports
+1. Set the distribution name
+   ```
+   distrib=bookworm-backports
+   ```
+1. Update the sbuild environment:
+   ```
+   sudo sbuild-update --update --dist-upgrade --clean --autoclean --autoremove ${distrib}
+   ```
+1. Create and switch to the backports branch:
+   ```
+   git checkout debian/latest
+   git checkout -b debian/bookworm-backports
+   ```
+1. Merge with the latest branch:
+   ```
+   git merge debian/latest
+   ```
+1. Update the `debian/changelog` file:
+   ```
+   gbp dch \
+     --bpo \
+     --debian-branch=debian/${distrib} \
+     --distribution=${distrib}
+   ```
+1. Build the debian package:
+   ```
+   gbp buildpackage \
+     --git-debian-branch=debian/${distrib} \
+     --git-ignore-new
+   ```
+1. Verify the results from lintian, fix the problems if any and repeat the 
+previous build until you are satisfied
+1. Apply the checklist
+1. Commit the changes
+1. Commit the changes in `debian/changelog`
+   ```
+   git add debian/changelog
+   git commit -m "Rebuild for ${distrib}"
+   ```
+1. Tag the debian release:
+   ```
+   gbp buildpackage \
+     --git-debian-branch=debian/${distrib} \
+     --git-tag-only
+   ```
+1. [Send the package to debian mentors](MENTORS.md)
+1. Once the package lands in the backports repository,
+[push the local repository to debian salsa](SALSA.md)
