@@ -12,6 +12,7 @@ a debian package with a new upstream version.
    ```
 1. Clone or update the remote repository
    ```
+   pkg_dir="${HOME}/dev/debian/${pkg_name}"
    cd $(dirname "${pkg_dir}")
    if [ -d "${pkg_name}" ]; then
      cd "${pkg_dir}"
