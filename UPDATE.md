@@ -97,7 +97,7 @@ fixed issue, perform a git commit
    ```
    git merge \
      -Xtheirs \
-     debian/${pkg_version}
+     $(git tag --list "debian/${pkg_version}*" | tail -n 1)
    ```
 1. Update the `debian/changelog` file:
    ```
