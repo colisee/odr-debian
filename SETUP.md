@@ -45,7 +45,7 @@ Run the following commands:
    # POST-BUILD RELATED (turn off functionality by setting variables to 0)
    ##############################################################################
    $run_lintian = 1;
-   $lintian_opts = ['--info', '--pedantic', '--display-info'];
+   $lintian_opts = ['-v', '-i', '-I', '-E', '--pedantic', '--profile', 'debian'];
    $run_piuparts = 0;
    $piuparts_opts = ['--schroot', '%r-%a-sbuild'];
    $run_autopkgtest = 0;
