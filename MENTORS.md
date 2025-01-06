@@ -12,5 +12,6 @@ debian package to debian mentors.
 1. Send the package to the debian repository:
    ```
    dput \
+     mentors \
      ../${pkg_name}_${pkg_version}*source.changes
    ```
