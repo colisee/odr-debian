@@ -3,7 +3,7 @@ debian package to debian mentors.
 
 1. Remove the snapshot artifacts
    ```
-   rm ../${pkg_name}_${pkg_version}*gbp*
+   rm ../${pkg_name}*_${pkg_version}*gbp*
    ```
 1. Sign the package:
    ```
