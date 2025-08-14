@@ -79,6 +79,13 @@ Run the following commands:
    allowed_distributions = .*
    EOF
    ```
+1. Set devscripts defaults
+   ```
+   tee $HOME/.devscripts << 'EOF'
+   USCAN_SYMLINK=rename
+   EOF
+   ```
+   
 
 ## Create the debian build environments
 
