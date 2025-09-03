@@ -9,5 +9,7 @@ who maintains the private debian package repository.
 ## Table of contents
 
 1. [Setup your development environment](SETUP.md)
+
 1. [Create the debian package definition](CREATE.md)
+
 1. [Update the debian package](UPDATE.md)

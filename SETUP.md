@@ -1,10 +1,13 @@
+# Environment initial setup
+
 This document describes the steps required to prepare
 the environment in charge of handling the debian packages.
 
 ## Software installation
 
-1. Install the following debian packages:
-   ```
+1. Install the following debian packages
+
+   ```sh
    sudo apt install --yes \
      debhelper \
      debmake \
@@ -16,8 +19,10 @@ the environment in charge of handling the debian packages.
 ## Software configuration
 
 Run the following commands:
+
 1. Set shell variables
-   ```
+
+   ```sh
    cat >> $HOME/.profile << 'EOF'
 
    DEBFULLNAME="First_name Last_name"
@@ -25,13 +30,17 @@ Run the following commands:
    export DEBFULLNAME DEBEMAIL
    EOF
    ```
+
 1. Set git defaults
-   ```
+
+   ```sh
    git config --global user.name "First_name Last_name"
    git config --global user.email "Your_email"
    ```
+
 1. Set sbuild defaults
-   ```
+
+   ```sh
    tee $HOME/.sbuildrc << 'EOF'
    ##############################################################################
    # PACKAGE BUILD RELATED (source-only-upload as default)
@@ -58,8 +67,10 @@ Run the following commands:
    1;
    EOF
    ```
+
 1. Set git-buildpackage defaults
-   ```
+
+   ```sh
    tee $HOME/.gbp.conf << 'EOF'
    [DEFAULT]
    builder = sbuild
@@ -67,8 +78,10 @@ Run the following commands:
    upstream-branch = upstream/latest
    EOF
    ```
+
 1. Set dput defaults
-   ```
+
+   ```sh
    tee $HOME/.dput.cf << 'EOF'
    [mentors]
    fqdn = mentors.debian.net
@@ -79,27 +92,33 @@ Run the following commands:
    allowed_distributions = .*
    EOF
    ```
+
 1. Set devscripts defaults
-   ```
+
+   ```sh
    tee $HOME/.devscripts << 'EOF'
    USCAN_SYMLINK=rename
    EOF
    ```
-   
 
 ## Create the debian build environments
 
 1. Create a dedicated tree structure:
-   ```
+
+   ```sh
    mkdir -p $HOME/dev/debian
    ```
+
 1. join the `sbuild` group
-   ```
+
+   ```sh
    sudo sbuild-adduser $LOGNAME
    sudo newgrp sbuild
    ```
+
 1. Create the debian build environment for unstable:
-   ```
+
+   ```sh
    sudo sbuild-createchroot \
      --include=eatmydata,ccache \
      --alias=sid \
@@ -108,8 +127,10 @@ Run the following commands:
      /srv/chroot/unstable-amd64-sbuild \
     http://deb.debian.org/debian
    ```
+
 1. Create the debian build environment for bookworm-backports:
-   ```
+
+   ```sh
    sudo sbuild-createchroot \
      --extra-repository="deb http://deb.debian.org/debian bookworm-backports main non-free" \
      --chroot-prefix=bookworm-backports \
