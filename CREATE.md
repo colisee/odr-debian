@@ -100,7 +100,7 @@ package for backports
 1. Set the distribution name
 
    ```sh
-   distrib=bookworm-backports
+   distrib="$(lsb_release --codename --short)-backports"
    ```
 
 1. Update the sbuild environment:
@@ -113,7 +113,7 @@ package for backports
 
    ```sh
    git checkout debian/latest
-   git checkout -b debian/bookworm-backports
+   git checkout -b debian/${distrib}
    ```
 
 1. Merge with the latest branch:

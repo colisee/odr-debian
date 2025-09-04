@@ -113,7 +113,7 @@ fixed issue, perform a git commit
 1. Set the distribution name
 
    ```sh
-   distrib=bookworm-backports
+   distrib="$(lsb_release --codename --short)-backports"
    ```
 
 1. Update the sbuild environment:
@@ -125,7 +125,7 @@ fixed issue, perform a git commit
 1. Switch to the backports branch:
 
    ```sh
-   git checkout debian/bookworm-backports
+   git checkout debian/${distrib}
    ```
 
 1. Merge with the latest branch:

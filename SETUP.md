@@ -119,23 +119,25 @@ Run the following commands:
 1. Create the debian build environment for unstable:
 
    ```sh
+   codename=unstable
    sudo sbuild-createchroot \
      --include=eatmydata,ccache \
      --alias=sid \
      --alias=UNRELEASED \
-     unstable \
-     /srv/chroot/unstable-amd64-sbuild \
+     ${codename} \
+     /srv/chroot/${codename}-amd64-sbuild \
     http://deb.debian.org/debian
    ```
 
-1. Create the debian build environment for bookworm-backports:
+1. Create the debian build environment for the stable backports:
 
    ```sh
+   codename=$(lsb_release --codename --short)
    sudo sbuild-createchroot \
-     --extra-repository="deb http://deb.debian.org/debian bookworm-backports main non-free" \
-     --chroot-prefix=bookworm-backports \
+     --extra-repository="deb http://deb.debian.org/debian ${codename}-backports main non-free" \
+     --chroot-prefix=${codename}-backports \
      --include=eatmydata,ccache \
-     bookworm \
-     /srv/chroot/bookworm-backports-amd64-sbuild \
+     ${codename} \
+     /srv/chroot/${codename}-backports-amd64-sbuild \
     http://deb.debian.org/debian
    ```
