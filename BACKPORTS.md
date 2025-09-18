@@ -46,8 +46,7 @@ package for backports.
 1. Switch to the backports branch and merge:
 
    ```sh
-   git checkout debian/${distrib}
-   if ! [ $? ]; then
+   if [ $(git branch --list "debian/${distrib}" | wc --lines) -eq 0 ]; then
      git checkout debian/latest
      git checkout -b debian/${distrib}
    else
