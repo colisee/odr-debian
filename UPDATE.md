@@ -31,7 +31,13 @@
 1. Update the sbuild environment:
 
    ```sh
-   sudo sbuild-update --update --dist-upgrade --clean --autoclean --autoremove ${distrib}
+   sudo sbuild-update \
+     --update \
+     --dist-upgrade \
+     --clean \
+     --autoclean \
+     --autoremove \
+     ${distrib}
    ```
 
 1. Switch to the debian/latest branch
