@@ -72,12 +72,12 @@ previous build until you are satisfied
    git commit -m "Initial release"
    ```
 
-1. Create the final build and tag the debian release:
+1. Tag the debian release:
 
    ```sh
    gbp buildpackage \
-     --git-debian-branch=debian/latest \
-     --git-tag
+     --git-debian-branch=debian/${distrib} \
+     --git-tag-only
    ```
 
 1. [Send the package to debian mentors](MENTORS.md)
