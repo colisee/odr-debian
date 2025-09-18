@@ -3,6 +3,28 @@
 Once your debian package is available in `testing`, you can create the
 package for backports.
 
+1. Set the package name
+
+   ```sh
+   pkg_name=odr-audioenc
+   ```
+
+1. Clone or update the remote repository
+
+   ```sh
+   pkg_dir="${HOME}/dev/debian/${pkg_name}"
+   cd $(dirname "${pkg_dir}")
+   if [ -d "${pkg_name}" ]; then
+     cd "${pkg_dir}"
+     gbp pull
+   else
+     gbp clone \
+       --all \
+       git@salsa.debian.org:ralex/${pkg_name}
+     cd "${pkg_dir}"
+   fi
+   ```
+
 1. Set the distribution name
 
    ```sh
@@ -17,7 +39,8 @@ package for backports.
      --dist-upgrade \
      --clean \
      --autoclean \
-     --autoremove ${distrib}
+     --autoremove \
+     ${distrib}
    ```
 
 1. Switch to the backports branch and merge:
