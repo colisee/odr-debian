@@ -22,8 +22,6 @@
    fi
    ```
 
-## unstable
-
 1. Set the distribution name
 
    ```sh
