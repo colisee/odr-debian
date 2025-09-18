@@ -7,6 +7,8 @@ and maintain the debian packages related to the Opendigitalradio mmbtools.
 
 1. [Setup your development environment](SETUP.md)
 
-1. [Create the debian package definition](CREATE.md)
+1. [Create the debian package for unstable](CREATE.md)
 
-1. [Update the debian package](UPDATE.md)
+1. [Update the debian package for unstable](UPDATE.md)
+
+1. [Prepare the debian package for backports](BACKPORTS.md)
