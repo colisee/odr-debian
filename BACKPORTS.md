@@ -50,6 +50,7 @@ package for backports.
      git checkout debian/latest
      git checkout -b debian/${distrib}
    else
+     git checkout "debian/${distrib}"
      git merge \
        -Xtheirs \
        $(git tag --list "debian/*-?" | tail -n 1)
