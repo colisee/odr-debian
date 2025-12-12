@@ -25,6 +25,7 @@ debian package to debian mentors.
 
    ```sh
    dput \
+     --force \
      mentors \
      ../${pkg_name}_${pkg_version}*source.changes
    ```
