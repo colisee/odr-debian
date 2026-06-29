@@ -27,10 +27,9 @@
 1. Create the initial debianized git environment
 
    ```sh
-   pkg_dir="${HOME}/dev/debian/${pkg_name}"
    upstream="https://github.com/Opendigitalradio/${pkg_name}/archive/refs/tags/v${pkg_version}.tar.gz"
-   mkdir -p "${pkg_dir}"
-   cd "${pkg_dir}"
+   mkdir "${pkg_name}"
+   cd "${pkg_name}"
    wget \
      --output-document="../${pkg_name}_${pkg_version}.tar.gz" \
      ${upstream}

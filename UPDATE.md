@@ -9,16 +9,14 @@
 1. Clone or update the remote repository
 
    ```sh
-   pkg_dir="${HOME}/dev/debian/${pkg_name}"
-   cd $(dirname "${pkg_dir}")
    if [ -d "${pkg_name}" ]; then
-     cd "${pkg_dir}"
+     cd "${pkg_name}"
      gbp pull
    else
      gbp clone \
        --all \
        git@salsa.debian.org:ralex/${pkg_name}
-     cd "${pkg_dir}"
+     cd "${pkg_name}"
    fi
    ```
 
