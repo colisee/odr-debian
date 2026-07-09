@@ -12,35 +12,36 @@ package for backports.
 1. Clone or update the remote repository
 
    ```sh
-   pkg_dir="${HOME}/dev/debian/${pkg_name}"
-   cd $(dirname "${pkg_dir}")
    if [ -d "${pkg_name}" ]; then
-     cd "${pkg_dir}"
+     cd "${pkg_name}"
      gbp pull
    else
      gbp clone \
        --all \
        git@salsa.debian.org:ralex/${pkg_name}
-     cd "${pkg_dir}"
+     cd "${pkg_name}"
    fi
    ```
 
-1. Set the distribution name
+1. Set the codename and distribution
 
    ```sh
-   distrib="trixie-backports"
+   export codename="$(lsb_release --short --codename)"
+   export distrib="${codename}-backports"
    ```
 
 1. Update the sbuild environment:
 
    ```sh
-   sudo sbuild-update \
-     --update \
-     --dist-upgrade \
-     --clean \
-     --autoclean \
-     --autoremove \
-     ${distrib}
+   rm $HOME/.cache/sbuild/${distrib}-amd64.tar.zst
+   mmdebstrap \
+     --include=ca-certificates \
+     --skip=output/dev \
+     --variant=buildd \
+     --customize-hook='echo "deb http://deb.debian.org/debian ${distrib} main contrib non-free non-free-firmware" > "$1/etc/apt/sources.list.d/backports.list"' \
+     ${codename} \
+     $HOME/.cache/sbuild/${distrib}-amd64.tar.zst \
+     https://deb.debian.org/debian
    ```
 
 1. Switch to the backports branch and merge:

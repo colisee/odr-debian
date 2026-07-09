@@ -9,16 +9,14 @@
 1. Clone or update the remote repository
 
    ```sh
-   pkg_dir="${HOME}/dev/debian/${pkg_name}"
-   cd $(dirname "${pkg_dir}")
    if [ -d "${pkg_name}" ]; then
-     cd "${pkg_dir}"
+     cd "${pkg_name}"
      gbp pull
    else
      gbp clone \
        --all \
        git@salsa.debian.org:ralex/${pkg_name}
-     cd "${pkg_dir}"
+     cd "${pkg_name}"
    fi
    ```
 
@@ -31,13 +29,14 @@
 1. Update the sbuild environment:
 
    ```sh
-   sudo sbuild-update \
-     --update \
-     --dist-upgrade \
-     --clean \
-     --autoclean \
-     --autoremove \
-     ${distrib}
+   rm $HOME/.cache/sbuild/${distrib}-amd64.tar.zst
+   mmdebstrap \
+     --include=ca-certificates \
+     --skip=output/dev \
+     --variant=buildd \
+     ${distrib} \
+     $HOME/.cache/sbuild/${distrib}-amd64.tar.zst \
+     https://deb.debian.org/debian
    ```
 
 1. Switch to the debian/latest branch
