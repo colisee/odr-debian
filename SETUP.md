@@ -41,18 +41,13 @@ Run the following commands:
 1. Set sbuild defaults
 
    ```sh
-   tee $HOME/.sbuildrc << 'EOF'
-   ##############################################################################
-   # PACKAGE BUILD RELATED (source-only-upload as default)
-   ##############################################################################
-   # -s
+   mkdir --parents $HOME/.config/sbuild/
+   tee $HOME/.config/sbuild/config.pl << 'EOF'
+   $chroot_mode = 'unshare';
+   $chroot_mode = 'unshare';
    $build_source = 1;
-   # --source-only-changes
    $source_only_changes = 1;
-
-   ##############################################################################
-   # POST-BUILD RELATED (turn off functionality by setting variables to 0)
-   ##############################################################################
+   $external_commands = { "build-failed-commands" => [ [ '%SBUILD_SHELL' ] ] };
    $run_lintian = 1;
    $lintian_opts = ['-v', '-i', '-I', '-E', '--pedantic', '--profile', 'debian'];
    $run_piuparts = 0;
@@ -60,12 +55,6 @@ Run the following commands:
    $run_autopkgtest = 0;
    $autopkgtest_root_args = '';
    $autopkgtest_opts = [ '--', 'schroot', '%r-%a-sbuild' ];
-
-   ##############################################################################
-   # PERL MAGIC
-   ##############################################################################
-   1;
-   EOF
    ```
 
 1. Set git-buildpackage defaults
@@ -114,30 +103,4 @@ Run the following commands:
    ```sh
    sudo sbuild-adduser $LOGNAME
    sudo newgrp sbuild
-   ```
-
-1. Create the debian build environment for unstable:
-
-   ```sh
-   codename=unstable
-   sudo sbuild-createchroot \
-     --include=eatmydata,ccache \
-     --alias=sid \
-     --alias=UNRELEASED \
-     ${codename} \
-     /srv/chroot/${codename}-amd64-sbuild \
-    http://deb.debian.org/debian
-   ```
-
-1. Create the debian build environment for the stable backports:
-
-   ```sh
-   codename=$(lsb_release --codename --short)
-   sudo sbuild-createchroot \
-     --extra-repository="deb http://deb.debian.org/debian ${codename}-backports main non-free" \
-     --chroot-prefix=${codename}-backports \
-     --include=eatmydata,ccache \
-     ${codename} \
-     /srv/chroot/${codename}-backports-amd64-sbuild \
-    http://deb.debian.org/debian
    ```
