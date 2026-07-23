@@ -16,6 +16,13 @@ the environment in charge of handling the debian packages.
      sbuild
    ```
 
+1. join the `sbuild` group
+
+   ```sh
+   sudo sbuild-adduser $LOGNAME
+   sudo newgrp sbuild
+   ```
+
 ## Software configuration
 
 Run the following commands:
@@ -88,11 +95,4 @@ Run the following commands:
    tee $HOME/.devscripts << 'EOF'
    USCAN_SYMLINK=rename
    EOF
-   ```
-
-1. join the `sbuild` group
-
-   ```sh
-   sudo sbuild-adduser $LOGNAME
-   sudo newgrp sbuild
    ```
