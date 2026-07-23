@@ -90,14 +90,6 @@ Run the following commands:
    EOF
    ```
 
-## Create the debian build environments
-
-1. Create a dedicated tree structure:
-
-   ```sh
-   mkdir -p $HOME/dev/debian
-   ```
-
 1. join the `sbuild` group
 
    ```sh
