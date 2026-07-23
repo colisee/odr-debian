@@ -18,19 +18,6 @@
    distrib=unstable
    ```
 
-1. Update the sbuild environment
-
-   ```sh
-   rm $HOME/.cache/sbuild/${distrib}-amd64.tar.zst
-   mmdebstrap \
-     --include=ca-certificates \
-     --skip=output/dev \
-     --variant=buildd \
-     ${distrib} \
-     $HOME/.cache/sbuild/${distrib}-amd64.tar.zst \
-     https://deb.debian.org/debian
-   ```
-
 1. Create the initial debianized git environment
 
    ```sh

@@ -30,20 +30,6 @@ package for backports.
    export distrib="${codename}-backports"
    ```
 
-1. Update the sbuild environment:
-
-   ```sh
-   rm $HOME/.cache/sbuild/${distrib}-amd64.tar.zst
-   mmdebstrap \
-     --include=ca-certificates \
-     --skip=output/dev \
-     --variant=buildd \
-     --customize-hook='echo "deb http://deb.debian.org/debian ${distrib} main contrib non-free non-free-firmware" > "$1/etc/apt/sources.list.d/backports.list"' \
-     ${codename} \
-     $HOME/.cache/sbuild/${distrib}-amd64.tar.zst \
-     https://deb.debian.org/debian
-   ```
-
 1. Switch to the backports branch and merge:
 
    ```sh
