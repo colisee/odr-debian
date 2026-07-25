@@ -18,7 +18,7 @@ package for backports.
    else
      gbp clone \
        --all \
-       git@salsa.debian.org:ralex/${pkg_name}
+       salsa:ralex/${pkg_name}
      cd "${pkg_name}"
    fi
    ```
