@@ -30,17 +30,16 @@ package for backports.
    export distrib="${codename}-backports"
    ```
 
-1. Switch to the backports branch and merge:
+1. Prepare the backports branch:
 
    ```sh
-   if [ $(git branch --list "debian/${distrib}" | wc --lines) -eq 0 ]; then
-     git checkout debian/latest
-     git checkout -b debian/${distrib}
-   else
-     git checkout "debian/${distrib}"
+   if git checkout "debian/${distrib}"; then
      git merge \
        -Xtheirs \
        $(git tag --list "debian/*-?" | tail -n 1)
+   else
+     git checkout debian/latest
+     git checkout -b debian/${distrib}
    fi
    ```
 
