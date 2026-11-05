@@ -60,7 +60,8 @@ applicable
    ```sh
    gbp buildpackage \
      --git-debian-branch=debian/${distrib} \
-     --git-ignore-new
+     --git-ignore-new \
+     --git-builder="sbuild --build-dep-resolver=aptitude"
    ```
 
 1. Verify the results from lintian, fix the problems
